@@ -46,8 +46,10 @@ class _MyAppState extends State<MyApp> {
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Image.network(
-                    "https:\/\/www.freetogame.com\/g\/306\/thumbnail.jpg",loadingBuilder: (context,child,chunk)=> child,
+                    "https:\/\/www.freetogame.com\/g\/306\/thumbnail.jpg",
+                    loadingBuilder: (context, child, chunk) => child,
                     fit: BoxFit.fill,
+                    scale: 2,
                   ),
                 ),
                 expandedHeight: 250,
@@ -94,6 +96,12 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }
 
 class BuildImages extends StatelessWidget {
@@ -123,9 +131,12 @@ class BuildImages extends StatelessWidget {
               child: Column(
                 children: [
                   Text(listOfGamesNew[index].name),
-                  Placeholder(
-                    fallbackHeight:
-                        MediaQuery.of(context).size.height * 0.20 - 7,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    height: MediaQuery.of(context).size.width * 0.40,
+                    child: const FittedBox(
+                      child: Placeholder(),
+                    ),
                   )
                 ],
               ),
