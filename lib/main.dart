@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vintage_games/view_games.dart';
 
-void main() => runApp(MaterialApp(
-      theme: _themeData(),
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Skill Builder',
-      home: MyApp(),
-    ));
+void main() => runApp(
+      MaterialApp(
+        theme: _themeData(),
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Skill Builder',
+        home: MyApp(),
+      ),
+    );
 
 class MyApp extends StatefulWidget {
   @override
@@ -36,20 +38,19 @@ class _MyAppState extends State<MyApp> {
             DefaultTabController(
               length: 1,
               child: SliverAppBar(
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Icon(
+                    Icons.sports_esports_outlined,
+                    size: MediaQuery.of(context).size.shortestSide * 0.8,
+                  ),
+                ),
+                backgroundColor: Colors.blue[900],
                 centerTitle: true,
                 title: Text(
                   "Bruce’s Retro Games",
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize:
-                          MediaQuery.of(context).size.shortestSide * 0.08),
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    "https:\/\/www.freetogame.com\/g\/306\/thumbnail.jpg",
-                    loadingBuilder: (context, child, chunk) => child,
-                    fit: BoxFit.fill,
-                    scale: 2,
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: MediaQuery.of(context).size.shortestSide * 0.08,
                   ),
                 ),
                 expandedHeight: 250,
@@ -68,18 +69,20 @@ class _MyAppState extends State<MyApp> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
-                              controller: controller,
-                              onChanged: (value) {
-                                setState(() {
-                                  list = searchGames(value, listOfGames);
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                  hintText: 'search games',
-                                  icon: Icon(
-                                    Icons.search,
-                                    color: Colors.white,
-                                  ))),
+                            controller: controller,
+                            onChanged: (value) {
+                              setState(() {
+                                list = searchGames(value, listOfGames);
+                              });
+                            },
+                            decoration: const InputDecoration(
+                              hintText: 'search games',
+                              icon: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     )
@@ -121,7 +124,6 @@ class BuildImages extends StatelessWidget {
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             crossAxisCount: 2,
-            // mainAxisExtent: MediaQuery.of(context).size.height * 0.25 - 20
           ),
           itemCount: listOfGamesNew.length,
           primary: false,
@@ -134,8 +136,8 @@ class BuildImages extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
                     height: MediaQuery.of(context).size.width * 0.40,
-                    child: const FittedBox(
-                      child: Placeholder(),
+                    child: FittedBox(
+                      child: Image.asset('assets/brg.jpeg'),
                     ),
                   )
                 ],
@@ -152,23 +154,25 @@ ThemeData _themeData() {
   return ThemeData.light().copyWith(
     indicatorColor: Colors.yellowAccent,
     colorScheme: const ColorScheme(
-        primary: Colors.yellowAccent,
-        primaryVariant: Colors.black,
-        secondary: Colors.yellowAccent,
-        secondaryVariant: Colors.yellowAccent,
-        surface: Colors.yellowAccent,
-        background: Colors.yellowAccent,
-        error: Colors.yellowAccent,
-        onPrimary: Colors.yellowAccent,
-        onSecondary: Colors.yellowAccent,
-        onSurface: Colors.yellowAccent,
-        onBackground: Colors.yellowAccent,
-        onError: Colors.yellowAccent,
-        brightness: Brightness.light),
+      primary: Colors.yellowAccent,
+      primaryVariant: Colors.black,
+      secondary: Colors.yellowAccent,
+      secondaryVariant: Colors.yellowAccent,
+      surface: Colors.yellowAccent,
+      background: Colors.yellowAccent,
+      error: Colors.yellowAccent,
+      onPrimary: Colors.yellowAccent,
+      onSecondary: Colors.yellowAccent,
+      onSurface: Colors.yellowAccent,
+      onBackground: Colors.yellowAccent,
+      onError: Colors.yellowAccent,
+      brightness: Brightness.light,
+    ),
     textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: Colors.yellowAccent,
-        selectionColor: Colors.yellowAccent,
-        selectionHandleColor: Colors.yellowAccent),
+      cursorColor: Colors.yellowAccent,
+      selectionColor: Colors.yellowAccent,
+      selectionHandleColor: Colors.yellowAccent,
+    ),
     appBarTheme: const AppBarTheme(
       color: Colors.black,
       titleTextStyle: TextStyle(color: Colors.yellowAccent),
