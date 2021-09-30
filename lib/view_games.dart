@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vintage_games/domain/game.dart';
 
 
 List<Game> listOfGames = [
@@ -67,25 +68,6 @@ List<Game> searchGames(String input, List<Game> list) {
   return result;
 }
 
-class Game {
-  final int id;
-  final String title;
-  final String thumbnail;
-
-  Game({
-    required this.id,
-    required this.title,
-    required this.thumbnail,
-  });
-
-  factory Game.fromJson(dynamic jeson) {
-    return Game(
-      id: jeson['id'] as int,
-      title: jeson['title'] as String,
-      thumbnail: jeson['thumbnail'] as String,
-    );
-  }
-}
 
 List<Game> parseGame(String responsBody) {
   final parsed = jsonDecode(responsBody) as List<dynamic>;
