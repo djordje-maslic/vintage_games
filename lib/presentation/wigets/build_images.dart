@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vintage_games/domain/game.dart';
+import 'package:vintage_games/infrastructure/favorits_prefs_games.dart';
+import 'package:vintage_games/presentation/wigets/add_favorites_icon.dart';
 
 class BuildImages extends StatefulWidget {
   final List<Game> listOfGamesNew;
@@ -40,13 +43,17 @@ class _BuildImagesState extends State<BuildImages> {
                     key: ValueKey(widget.listOfGamesNew[index].id),
                     onTap: () async {
                       final bool checkFavorits = await getFavoritsMap(
-                          id: widget.listOfGamesNew[index].id);
+                        id: widget.listOfGamesNew[index].id,
+                      );
                       {
-                        setState(() {
-                          setFavoritsMap(
+                        setState(
+                          () {
+                            setFavoritsMap(
                               id: widget.listOfGamesNew[index].id,
-                              favoritCheck: !checkFavorits);
-                        });
+                              favoritCheck: !checkFavorits,
+                            );
+                          },
+                        );
                       }
                     },
                     child: Stack(

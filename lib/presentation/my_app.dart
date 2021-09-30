@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vintage_games/view_games.dart';
+import 'package:vintage_games/domain/game.dart';
+import 'package:vintage_games/infrastructure/http_games.dart';
+import 'package:vintage_games/infrastructure/search_games.dart';
 import 'package:vintage_games/presentation/wigets/build_images.dart';
 
 class MyApp extends StatefulWidget {
@@ -99,40 +101,5 @@ class _MyAppState extends State<MyApp> {
   void dispose() {
     controller.dispose();
     super.dispose();
-  }
-}
-
-
-class AddFavoritesIcon extends StatelessWidget {
-  final int gameId;
-  const AddFavoritesIcon({required this.gameId, Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: getFavoritsMap(id: gameId),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data == false) {
-            return const Positioned(
-              bottom: 25,
-              right: 10,
-              child: Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-              ),
-            );
-          } else {
-            return const Positioned(
-              bottom: 25,
-              right: 10,
-              child: Icon(Icons.favorite, color: Colors.red),
-            );
-          }
-        } else {
-          return const CircularProgressIndicator();
-        }
-      },
-    );
   }
 }

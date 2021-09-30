@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vintage_games/infrastructure/favorits_prefs_games.dart';
 import 'package:vintage_games/presentation/my_app.dart';
 import 'package:vintage_games/presentation/theme/theme.dart';
-import 'package:vintage_games/view_games.dart';
 
 
 Future main()async {
