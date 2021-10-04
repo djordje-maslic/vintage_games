@@ -69,9 +69,6 @@ class _BuildImagesState extends State<BuildImages> {
                                 child: Image.network(
                                   widget.listOfGamesNew[index].thumbnail,
                                   fit: BoxFit.fill,
-                                  errorBuilder: (context, object, stt) {
-                                    return const Text('error');
-                                  },
                                 ),
                               ),
                             )
@@ -86,7 +83,10 @@ class _BuildImagesState extends State<BuildImages> {
                 },
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return const Padding(
+                padding: EdgeInsets.all(38.0),
+                child:  CircularProgressIndicator(color: Colors.blue,),
+              );
             } else {
               return Text(
                 'error',
