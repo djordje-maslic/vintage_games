@@ -22,7 +22,7 @@ void main() {
         client.get(Uri.parse('https://www.freetogame.com/api/games'), headers: {
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*"
-        }),
+        },),
       ).thenAnswer(
         (_) async =>
             http.Response('[{"id":1,"title":"game1", "thumbnail":"url"}]', 200),
@@ -40,7 +40,7 @@ void main() {
           headers: {
             "Accept": "application/json",
             "Access-Control-Allow-Origin": "*"
-          })).thenAnswer((_) async => http.Response('Not Found', 404));
+          },),).thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(fetchGame(client), throwsException);
     });
