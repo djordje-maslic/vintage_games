@@ -62,14 +62,10 @@ class _BuildImagesState extends State<BuildImages> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(widget.listOfGamesNew[index].title),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.45,
-                              height: MediaQuery.of(context).size.height * 0.18,
-                              child: FittedBox(
-                                child: Image.network(
-                                  widget.listOfGamesNew[index].thumbnail,
-                                  fit: BoxFit.fill,
-                                ),
+                            Expanded(
+                              child: Image.network(
+                                widget.listOfGamesNew[index].thumbnail,
+                                fit: BoxFit.fill,
                               ),
                             )
                           ],
@@ -85,12 +81,16 @@ class _BuildImagesState extends State<BuildImages> {
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Padding(
                 padding: EdgeInsets.all(38.0),
-                child:  CircularProgressIndicator(color: Colors.blue,),
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                ),
               );
             } else {
               return Text(
-                'error',
-                style: TextStyle(fontSize: MediaQuery.of(context).size.width),
+                'Check internet conection...',
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.shortestSide * 0.1,
+                ),
               );
             }
           },

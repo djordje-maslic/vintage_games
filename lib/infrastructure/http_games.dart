@@ -6,16 +6,28 @@ import 'package:vintage_games/domain/game.dart';
 
 List<Game> parseGame(String responsBody) {
   final parsed = jsonDecode(responsBody) as List<dynamic>;
-  return parsed
-      .map<Game>((json) => Game.fromJson(json))
-      .toList()
-      .sublist(0, 50);
+  if (parsed.isEmpty) {
+    return [];
+  } else {
+    if (parsed.length <= 50) {
+      return parsed
+          .map<Game>((json) => Game.fromJson(json))
+          .toList()
+          .sublist(0, parsed.length - 1);
+    } else {
+      return parsed
+          .map<Game>((json) => Game.fromJson(json))
+          .toList()
+          .sublist(0, 50);
+    }
+  }
 }
 
-Future<List<Game>> fetchGame() async {
-  final http.Client client = http.Client();
-  final http.Response response =
-      await client.get(Uri.parse('https://www.freetogame.com/api/games'));
+Future<List<Game>> fetchGame(http.Client client) async {
+  final http.Response response = await client.get(
+    Uri.parse('https://www.freetogame.com/api/games'),
+    headers: {"Accept": "application/json", "Access-Control-Allow-Origin": "*"},
+  );
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

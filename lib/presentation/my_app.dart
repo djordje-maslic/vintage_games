@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:vintage_games/domain/game.dart';
 import 'package:vintage_games/infrastructure/http_games.dart';
 import 'package:vintage_games/infrastructure/search_games.dart';
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    futureGame = fetchGame();
+    futureGame = fetchGame(http.Client());
     futureGame.then((value) => list.addAll(value));
   }
 
@@ -32,10 +33,11 @@ class _MyAppState extends State<MyApp> {
             DefaultTabController(
               length: 1,
               child: SliverAppBar(
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Icon(
-                    Icons.sports_esports_outlined,
-                    size: MediaQuery.of(context).size.shortestSide * 0.8,
+                flexibleSpace:const FlexibleSpaceBar(
+                  background: FittedBox(
+                    child: Icon(
+                      Icons.sports_esports_outlined,
+                    ),
                   ),
                 ),
                 backgroundColor: Colors.blue[900],
